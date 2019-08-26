@@ -1,0 +1,4 @@
+1.  create pair (priv, pub)
+2.  add pub key to smart contract
+3.  sign
+4.  verify signature
