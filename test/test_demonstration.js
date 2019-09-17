@@ -42,7 +42,7 @@ contract("demonstration", accounts => {
   it('should get pub key', async () => {
     let taskFn = 'get_public_key()';
     let taskArgs = '';
-    let taskGasLimit = 100000;
+    let taskGasLimit = 10000000;
     let taskGasPx = utils.toGrains(1);
     const contractAddr = fs.readFileSync('test/demonstration.txt', 'utf-8');
     task = await new Promise((resolve, reject) => {
@@ -76,8 +76,6 @@ contract("demonstration", accounts => {
     expect(task.engStatus).to.equal('SUCCESS');
 
     task = await enigma.decryptTaskResult(task);
-    console.log(task.decryptedOutput)
-    // expect(parseInt(task.decryptedOutput, 16)).to.equal(76 + 17);
+    expect(task.decryptedOutput.length).to.be.above(0);
   });
-
-})
+});
