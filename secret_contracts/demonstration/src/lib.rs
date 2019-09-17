@@ -31,7 +31,7 @@ pub trait ContractInterface {
 
 impl Contract {
   fn get_state() -> State {
-    match read_state!(STATE) {
+    match read_state!(STATE).unwrap() {
       Some(state) => state,
       None => panic!("state should already exist"),
     }
@@ -41,10 +41,8 @@ impl Contract {
 pub struct Contract;
 impl ContractInterface for Contract {
   fn construct() -> () {
-    let key_pair = KeyPair::new().unwrap();
-
     write_state!(STATE => State {
-      private_key: key_pair.get_privkey(),
+      private_key: generate_key(),
       nonce: U256::from(0)
     });
   }
